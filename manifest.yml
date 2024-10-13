@@ -1,0 +1,20 @@
+artifacts:
+  setup_script: setup.sql
+  extension_code: true
+  readme: README.md
+
+configuration:
+  default_streamlit: app_schema.main_app
+
+privileges:
+  - CREATE DATABASE:
+      description: "Create some test databases"
+
+references:
+  - table_to_consume:
+      label: "External Table Data"
+      description: "table the app will consume the data from"
+      privileges: SELECT,REFERENCES
+      object_type: TABLE
+      multi_valued: false
+      register_callback: config.table_to_consume_callback
